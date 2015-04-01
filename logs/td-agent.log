@@ -1,0 +1,1702 @@
+2015-03-31 15:38:36 +0000 [error]: dry run failed: undefined method `key?' for #<Array:0x007ff7ad090ae0>
+2015-03-31 15:39:12 +0000 [error]: dry run failed: undefined method `key?' for #<Array:0x007f7fbf064488>
+2015-03-31 15:39:31 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 15:39:31 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 15:39:31 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 15:39:31 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 15:39:31 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 15:39:31 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 15:39:31 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 15:39:31 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 15:39:31 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 15:39:31 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 15:39:31 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 15:39:31 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 15:39:31 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 15:39:31 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 15:39:31 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy-1-%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    field_integer time
+  </match>
+</ROOT>
+2015-03-31 15:39:31 +0000 [info]: adding source type="tail"
+2015-03-31 15:39:31 +0000 [info]: adding source type="tail"
+2015-03-31 15:39:31 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 15:39:31 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 15:39:31 +0000 [info]: following tail of /var/log/nginx/access.log
+2015-03-31 15:39:38 +0000 [info]: shutting down fluentd
+2015-03-31 15:39:38 +0000 [info]: process finished code=0
+2015-03-31 15:55:25 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 15:55:25 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 15:55:25 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 15:55:25 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 15:55:25 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 15:55:25 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 15:55:25 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 15:55:25 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 15:55:25 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 15:55:25 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 15:55:25 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 15:55:25 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 15:55:25 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 15:55:25 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 15:55:25 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy-1-%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    schema_path /etc/td-agent/haproxy.schema
+    field_integer time
+  </match>
+</ROOT>
+2015-03-31 15:55:25 +0000 [info]: adding source type="tail"
+2015-03-31 15:55:25 +0000 [info]: adding source type="tail"
+2015-03-31 15:55:25 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 15:55:25 +0000 [error]: unexpected error error="757: unexpected token at ',\n   {\n    \"name\": \"syslog_host\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"ps\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"pid\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"c_ip\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"c_port\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"time\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"f_end\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"b_end\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"b_server\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tq\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tw\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tc\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tr\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tt\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"status_code\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"bytes\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"req_cookie\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"res_cookie\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"t_state\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"actconn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"feconn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"beconn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"srv_conn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"retries\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"srv_queue\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"backend_queue\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"req_headers\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"res_headers\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"request\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   }\n'"
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/2.1.0/json/common.rb:155:in `parse'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/2.1.0/json/common.rb:155:in `parse'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:159:in `configure'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:127:in `block in configure'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `each'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `configure'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:77:in `run_configure'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:401:in `run_configure'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:140:in `block in start'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `call'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `main_process'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:243:in `block in supervise'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `fork'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `supervise'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:136:in `start'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/command/fluentd.rb:168:in `<top (required)>'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/bin/fluentd:6:in `<top (required)>'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `load'
+  2015-03-31 15:55:25 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `<top (required)>'
+  2015-03-31 15:55:25 +0000 [error]: /usr/sbin/td-agent:7:in `load'
+  2015-03-31 15:55:25 +0000 [error]: /usr/sbin/td-agent:7:in `<main>'
+2015-03-31 15:55:25 +0000 [info]: process finished code=256
+2015-03-31 15:55:25 +0000 [warn]: process died within 1 second. exit.
+2015-03-31 16:07:17 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:07:17 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:07:18 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:07:18 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:07:18 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:07:18 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:07:18 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:07:18 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:07:18 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:07:18 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:07:18 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:07:18 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:07:18 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:07:18 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:07:18 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy-1-%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    schema_path /etc/td-agent/haproxy.schema
+    field_integer time
+  </match>
+</ROOT>
+2015-03-31 16:07:18 +0000 [info]: adding source type="tail"
+2015-03-31 16:07:18 +0000 [info]: adding source type="tail"
+2015-03-31 16:07:18 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:07:18 +0000 [error]: unexpected error error="757: unexpected token at '{   \n   {\n    \"name\": \"syslog_time\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"syslog_host\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"ps\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"pid\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"c_ip\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"c_port\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"time\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"f_end\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"b_end\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"b_server\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tq\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tw\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tc\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tr\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tt\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"status_code\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"bytes\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"req_cookie\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"res_cookie\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"t_state\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"actconn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"feconn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"beconn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"srv_conn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"retries\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"srv_queue\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"backend_queue\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"req_headers\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"res_headers\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"request\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   }\n}\n'"
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/2.1.0/json/common.rb:155:in `parse'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/2.1.0/json/common.rb:155:in `parse'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:159:in `configure'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:127:in `block in configure'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `each'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `configure'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:77:in `run_configure'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:401:in `run_configure'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:140:in `block in start'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `call'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `main_process'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:243:in `block in supervise'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `fork'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `supervise'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:136:in `start'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/command/fluentd.rb:168:in `<top (required)>'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/bin/fluentd:6:in `<top (required)>'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `load'
+  2015-03-31 16:07:18 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `<top (required)>'
+  2015-03-31 16:07:18 +0000 [error]: /usr/sbin/td-agent:7:in `load'
+  2015-03-31 16:07:18 +0000 [error]: /usr/sbin/td-agent:7:in `<main>'
+2015-03-31 16:07:18 +0000 [info]: process finished code=256
+2015-03-31 16:07:18 +0000 [warn]: process died within 1 second. exit.
+2015-03-31 16:07:37 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:07:37 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:07:37 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:07:37 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:07:37 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:07:37 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:07:37 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:07:37 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:07:37 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:07:37 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:07:37 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:07:37 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:07:37 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:07:37 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:07:37 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy-1-%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    schema_path /etc/td-agent/haproxy.schema
+    field_integer time
+  </match>
+</ROOT>
+2015-03-31 16:07:37 +0000 [info]: adding source type="tail"
+2015-03-31 16:07:37 +0000 [info]: adding source type="tail"
+2015-03-31 16:07:37 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:07:38 +0000 [error]: unexpected error error="757: unexpected token at '{   \n   [{\n    \"name\": \"syslog_time\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"syslog_host\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"ps\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"pid\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"c_ip\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"c_port\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"time\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"f_end\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"b_end\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"b_server\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tq\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tw\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tc\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tr\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tt\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"status_code\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"bytes\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"req_cookie\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"res_cookie\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"t_state\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"actconn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"feconn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"beconn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"srv_conn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"retries\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"srv_queue\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"backend_queue\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"req_headers\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"res_headers\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"request\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   }]\n}\n'"
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/2.1.0/json/common.rb:155:in `parse'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/2.1.0/json/common.rb:155:in `parse'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:159:in `configure'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:127:in `block in configure'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `each'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `configure'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:77:in `run_configure'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:401:in `run_configure'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:140:in `block in start'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `call'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `main_process'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:243:in `block in supervise'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `fork'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `supervise'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:136:in `start'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/command/fluentd.rb:168:in `<top (required)>'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/bin/fluentd:6:in `<top (required)>'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `load'
+  2015-03-31 16:07:38 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `<top (required)>'
+  2015-03-31 16:07:38 +0000 [error]: /usr/sbin/td-agent:7:in `load'
+  2015-03-31 16:07:38 +0000 [error]: /usr/sbin/td-agent:7:in `<main>'
+2015-03-31 16:07:38 +0000 [info]: process finished code=256
+2015-03-31 16:07:38 +0000 [warn]: process died within 1 second. exit.
+2015-03-31 16:08:14 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:08:14 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:08:14 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:08:14 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:08:14 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:08:14 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:08:14 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:08:14 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:08:14 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:08:14 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:08:14 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:08:14 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:08:14 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:08:14 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:08:14 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy-1-%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    schema_path /etc/td-agent/haproxy.schema
+    field_integer time
+  </match>
+</ROOT>
+2015-03-31 16:08:14 +0000 [info]: adding source type="tail"
+2015-03-31 16:08:14 +0000 [info]: adding source type="tail"
+2015-03-31 16:08:14 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:08:14 +0000 [error]: unexpected error error="undefined method `key?' for #<Array:0x007f7ff4c5e628>"
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:542:in `block in load_schema'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:541:in `each'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:541:in `load_schema'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:159:in `configure'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:127:in `block in configure'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `each'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `configure'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:77:in `run_configure'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:401:in `run_configure'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:140:in `block in start'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `call'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `main_process'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:243:in `block in supervise'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `fork'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `supervise'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:136:in `start'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/command/fluentd.rb:168:in `<top (required)>'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/bin/fluentd:6:in `<top (required)>'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `load'
+  2015-03-31 16:08:14 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `<top (required)>'
+  2015-03-31 16:08:14 +0000 [error]: /usr/sbin/td-agent:7:in `load'
+  2015-03-31 16:08:14 +0000 [error]: /usr/sbin/td-agent:7:in `<main>'
+2015-03-31 16:08:14 +0000 [info]: process finished code=256
+2015-03-31 16:08:14 +0000 [warn]: process died within 1 second. exit.
+2015-03-31 16:14:14 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:14:14 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:14:14 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:14:14 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:14:14 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:14:14 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:14:14 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:14:14 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:14:14 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:14:14 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:14:14 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:14:14 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:14:14 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:14:14 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:14:14 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy-1-%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    schema_path /etc/td-agent/haproxy.schema
+    field_integer time
+  </match>
+</ROOT>
+2015-03-31 16:14:14 +0000 [info]: adding source type="tail"
+2015-03-31 16:14:14 +0000 [info]: adding source type="tail"
+2015-03-31 16:14:14 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:14:14 +0000 [error]: unexpected error error="undefined method `key?' for #<Array:0x007fb248c5e7c8>"
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:542:in `block in load_schema'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:541:in `each'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:541:in `load_schema'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:159:in `configure'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:127:in `block in configure'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `each'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `configure'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:77:in `run_configure'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:401:in `run_configure'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:140:in `block in start'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `call'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `main_process'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:243:in `block in supervise'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `fork'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `supervise'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:136:in `start'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/command/fluentd.rb:168:in `<top (required)>'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/bin/fluentd:6:in `<top (required)>'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `load'
+  2015-03-31 16:14:14 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `<top (required)>'
+  2015-03-31 16:14:14 +0000 [error]: /usr/sbin/td-agent:7:in `load'
+  2015-03-31 16:14:14 +0000 [error]: /usr/sbin/td-agent:7:in `<main>'
+2015-03-31 16:14:14 +0000 [info]: process finished code=256
+2015-03-31 16:14:14 +0000 [warn]: process died within 1 second. exit.
+2015-03-31 16:14:19 +0000 [error]: dry run failed: undefined method `key?' for #<Array:0x007fdb5a868b38>
+2015-03-31 16:14:19 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:14:19 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:14:19 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:14:19 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:14:19 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:14:19 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:14:19 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:14:19 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:14:19 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:14:19 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:14:19 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:14:19 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:14:19 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:14:19 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:14:19 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy-1-%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    schema_path /etc/td-agent/haproxy.schema
+    field_integer time
+  </match>
+</ROOT>
+2015-03-31 16:14:19 +0000 [info]: adding source type="tail"
+2015-03-31 16:14:19 +0000 [info]: adding source type="tail"
+2015-03-31 16:14:19 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:14:19 +0000 [error]: unexpected error error="undefined method `key?' for #<Array:0x007f319b866540>"
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:542:in `block in load_schema'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:541:in `each'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:541:in `load_schema'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:159:in `configure'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:127:in `block in configure'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `each'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `configure'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:77:in `run_configure'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:401:in `run_configure'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:140:in `block in start'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `call'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `main_process'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:243:in `block in supervise'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `fork'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `supervise'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:136:in `start'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/command/fluentd.rb:168:in `<top (required)>'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/bin/fluentd:6:in `<top (required)>'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `load'
+  2015-03-31 16:14:19 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `<top (required)>'
+  2015-03-31 16:14:19 +0000 [error]: /usr/sbin/td-agent:7:in `load'
+  2015-03-31 16:14:19 +0000 [error]: /usr/sbin/td-agent:7:in `<main>'
+2015-03-31 16:14:19 +0000 [info]: process finished code=256
+2015-03-31 16:14:19 +0000 [warn]: process died within 1 second. exit.
+2015-03-31 16:16:50 +0000 [error]: dry run failed: undefined method `key?' for #<Array:0x007f4c850609e0>
+2015-03-31 16:16:50 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:16:50 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:16:51 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:16:51 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:16:51 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:16:51 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:16:51 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:16:51 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:16:51 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:16:51 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:16:51 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:16:51 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:16:51 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:16:51 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:16:51 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy-1-%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    schema_path /etc/td-agent/haproxy.schema
+  </match>
+</ROOT>
+2015-03-31 16:16:51 +0000 [info]: adding source type="tail"
+2015-03-31 16:16:51 +0000 [info]: adding source type="tail"
+2015-03-31 16:16:51 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:16:51 +0000 [error]: unexpected error error="undefined method `key?' for #<Array:0x007f2d5485e6b0>"
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:542:in `block in load_schema'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:541:in `each'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:541:in `load_schema'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:159:in `configure'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:127:in `block in configure'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `each'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `configure'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:77:in `run_configure'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:401:in `run_configure'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:140:in `block in start'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `call'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `main_process'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:243:in `block in supervise'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `fork'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `supervise'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:136:in `start'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/command/fluentd.rb:168:in `<top (required)>'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/bin/fluentd:6:in `<top (required)>'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `load'
+  2015-03-31 16:16:51 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `<top (required)>'
+  2015-03-31 16:16:51 +0000 [error]: /usr/sbin/td-agent:7:in `load'
+  2015-03-31 16:16:51 +0000 [error]: /usr/sbin/td-agent:7:in `<main>'
+2015-03-31 16:16:51 +0000 [info]: process finished code=256
+2015-03-31 16:16:51 +0000 [warn]: process died within 1 second. exit.
+2015-03-31 16:22:09 +0000 [error]: dry run failed: 757: unexpected token at '"schema": {
+  "fields": [
+   {
+    "name": "syslog_time",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "syslog_host",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "ps",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "pid",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "c_ip",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "c_port",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "time",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "f_end",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "b_end",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "b_server",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "tq",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "tw",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "tc",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "tr",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "tt",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "status_code",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "bytes",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "req_cookie",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "res_cookie",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "t_state",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "actconn",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "feconn",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "beconn",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "srv_conn",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "retries",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "srv_queue",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "backend_queue",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "req_headers",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "res_headers",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "request",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   }
+  ]
+ }
+'
+2015-03-31 16:22:09 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:22:09 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:22:09 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:22:09 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:22:09 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:22:09 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:22:09 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:22:09 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:22:09 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:22:09 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:22:09 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:22:09 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:22:09 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:22:09 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:22:09 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy-1-%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    schema_path /etc/td-agent/haproxy.schema
+  </match>
+</ROOT>
+2015-03-31 16:22:09 +0000 [info]: adding source type="tail"
+2015-03-31 16:22:09 +0000 [info]: adding source type="tail"
+2015-03-31 16:22:09 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:22:09 +0000 [error]: unexpected error error="757: unexpected token at '\"schema\": {\n  \"fields\": [\n   {\n    \"name\": \"syslog_time\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"syslog_host\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"ps\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"pid\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"c_ip\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"c_port\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"time\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"f_end\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"b_end\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"b_server\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tq\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tw\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tc\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tr\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"tt\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"status_code\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"bytes\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"req_cookie\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"res_cookie\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"t_state\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"actconn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"feconn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"beconn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"srv_conn\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"retries\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"srv_queue\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"backend_queue\",\n    \"type\": \"INTEGER\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"req_headers\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"res_headers\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   },\n   {\n    \"name\": \"request\",\n    \"type\": \"STRING\",\n    \"mode\": \"NULLABLE\"\n   }\n  ]\n }\n'"
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/2.1.0/json/common.rb:155:in `parse'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/2.1.0/json/common.rb:155:in `parse'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:159:in `configure'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:127:in `block in configure'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `each'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:118:in `configure'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/engine.rb:77:in `run_configure'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:401:in `run_configure'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:140:in `block in start'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `call'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:268:in `main_process'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:243:in `block in supervise'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `fork'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:242:in `supervise'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/supervisor.rb:136:in `start'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/command/fluentd.rb:168:in `<top (required)>'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/bin/fluentd:6:in `<top (required)>'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `load'
+  2015-03-31 16:22:09 +0000 [error]: /opt/td-agent/embedded/bin/fluentd:23:in `<top (required)>'
+  2015-03-31 16:22:09 +0000 [error]: /usr/sbin/td-agent:7:in `load'
+  2015-03-31 16:22:09 +0000 [error]: /usr/sbin/td-agent:7:in `<main>'
+2015-03-31 16:22:09 +0000 [info]: process finished code=256
+2015-03-31 16:22:09 +0000 [warn]: process died within 1 second. exit.
+2015-03-31 16:24:12 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:24:12 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:24:12 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:24:12 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:24:12 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:24:12 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:24:12 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:24:12 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:24:12 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:24:12 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:24:12 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:24:12 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:24:12 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:24:12 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:24:12 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy-1-%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    schema_path /etc/td-agent/haproxy.schema
+  </match>
+</ROOT>
+2015-03-31 16:24:12 +0000 [info]: adding source type="tail"
+2015-03-31 16:24:12 +0000 [info]: adding source type="tail"
+2015-03-31 16:24:12 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:24:12 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 16:24:12 +0000 [info]: following tail of /var/log/nginx/access.log
+2015-03-31 16:24:40 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:24:40 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:24:41 +0000 [error]: tables.insert API project_id="ybd-rtb-stg" dataset="logs" table="haproxy-1-20150331" code=400 message="Invalid table ID \"haproxy-1-20150331\". Table IDs must be alphanumeric (plus underscores) and must be at most 1024 characters long."
+2015-03-31 16:24:41 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2015-03-31 16:24:42 +0000 error_class="RuntimeError" error="failed to create table in bigquery" plugin_id="object:3ffe59e1e744"
+  2015-03-31 16:24:41 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:279:in `create_table'
+  2015-03-31 16:24:41 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:305:in `insert'
+  2015-03-31 16:24:41 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:346:in `write'
+  2015-03-31 16:24:41 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:300:in `write_chunk'
+  2015-03-31 16:24:41 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:280:in `pop'
+  2015-03-31 16:24:41 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:316:in `try_flush'
+  2015-03-31 16:24:41 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:136:in `run'
+2015-03-31 16:24:43 +0000 [error]: tables.insert API project_id="ybd-rtb-stg" dataset="logs" table="haproxy-1-20150331" code=400 message="Invalid table ID \"haproxy-1-20150331\". Table IDs must be alphanumeric (plus underscores) and must be at most 1024 characters long."
+2015-03-31 16:24:43 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2015-03-31 16:24:43 +0000 error_class="RuntimeError" error="failed to create table in bigquery" plugin_id="object:3ffe59e1e744"
+  2015-03-31 16:24:43 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:279:in `create_table'
+  2015-03-31 16:24:43 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:305:in `insert'
+  2015-03-31 16:24:43 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:346:in `write'
+  2015-03-31 16:24:43 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:300:in `write_chunk'
+  2015-03-31 16:24:43 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:280:in `pop'
+  2015-03-31 16:24:43 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:316:in `try_flush'
+  2015-03-31 16:24:43 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:136:in `run'
+2015-03-31 16:24:44 +0000 [error]: tables.insert API project_id="ybd-rtb-stg" dataset="logs" table="haproxy-1-20150331" code=400 message="Invalid table ID \"haproxy-1-20150331\". Table IDs must be alphanumeric (plus underscores) and must be at most 1024 characters long."
+2015-03-31 16:24:44 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2015-03-31 16:24:48 +0000 error_class="RuntimeError" error="failed to create table in bigquery" plugin_id="object:3ffe59e1e744"
+  2015-03-31 16:24:44 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:279:in `create_table'
+  2015-03-31 16:24:44 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:305:in `insert'
+  2015-03-31 16:24:44 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:346:in `write'
+  2015-03-31 16:24:44 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:300:in `write_chunk'
+  2015-03-31 16:24:44 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:280:in `pop'
+  2015-03-31 16:24:44 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:316:in `try_flush'
+  2015-03-31 16:24:44 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:136:in `run'
+2015-03-31 16:24:49 +0000 [error]: tables.insert API project_id="ybd-rtb-stg" dataset="logs" table="haproxy-1-20150331" code=400 message="Invalid table ID \"haproxy-1-20150331\". Table IDs must be alphanumeric (plus underscores) and must be at most 1024 characters long."
+2015-03-31 16:24:49 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2015-03-31 16:24:56 +0000 error_class="RuntimeError" error="failed to create table in bigquery" plugin_id="object:3ffe59e1e744"
+  2015-03-31 16:24:49 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:279:in `create_table'
+  2015-03-31 16:24:49 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:305:in `insert'
+  2015-03-31 16:24:49 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:346:in `write'
+  2015-03-31 16:24:49 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:300:in `write_chunk'
+  2015-03-31 16:24:49 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:280:in `pop'
+  2015-03-31 16:24:49 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:316:in `try_flush'
+  2015-03-31 16:24:49 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:136:in `run'
+2015-03-31 16:24:57 +0000 [error]: tables.insert API project_id="ybd-rtb-stg" dataset="logs" table="haproxy-1-20150331" code=400 message="Invalid table ID \"haproxy-1-20150331\". Table IDs must be alphanumeric (plus underscores) and must be at most 1024 characters long."
+2015-03-31 16:24:57 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2015-03-31 16:25:13 +0000 error_class="RuntimeError" error="failed to create table in bigquery" plugin_id="object:3ffe59e1e744"
+  2015-03-31 16:24:57 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:279:in `create_table'
+  2015-03-31 16:24:57 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:305:in `insert'
+  2015-03-31 16:24:57 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:346:in `write'
+  2015-03-31 16:24:57 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:300:in `write_chunk'
+  2015-03-31 16:24:57 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:280:in `pop'
+  2015-03-31 16:24:57 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:316:in `try_flush'
+  2015-03-31 16:24:57 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:136:in `run'
+2015-03-31 16:25:14 +0000 [error]: tables.insert API project_id="ybd-rtb-stg" dataset="logs" table="haproxy-1-20150331" code=400 message="Invalid table ID \"haproxy-1-20150331\". Table IDs must be alphanumeric (plus underscores) and must be at most 1024 characters long."
+2015-03-31 16:25:14 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2015-03-31 16:25:44 +0000 error_class="RuntimeError" error="failed to create table in bigquery" plugin_id="object:3ffe59e1e744"
+  2015-03-31 16:25:14 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:279:in `create_table'
+  2015-03-31 16:25:14 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:305:in `insert'
+  2015-03-31 16:25:14 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:346:in `write'
+  2015-03-31 16:25:14 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:300:in `write_chunk'
+  2015-03-31 16:25:14 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:280:in `pop'
+  2015-03-31 16:25:14 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:316:in `try_flush'
+  2015-03-31 16:25:14 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:136:in `run'
+2015-03-31 16:25:16 +0000 [info]: shutting down fluentd
+2015-03-31 16:25:17 +0000 [error]: tables.insert API project_id="ybd-rtb-stg" dataset="logs" table="haproxy-1-20150331" code=400 message="Invalid table ID \"haproxy-1-20150331\". Table IDs must be alphanumeric (plus underscores) and must be at most 1024 characters long."
+2015-03-31 16:25:17 +0000 [warn]: before_shutdown failed error="failed to create table in bigquery"
+  2015-03-31 16:25:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:279:in `create_table'
+  2015-03-31 16:25:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:305:in `insert'
+  2015-03-31 16:25:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:346:in `write'
+  2015-03-31 16:25:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:300:in `write_chunk'
+  2015-03-31 16:25:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:280:in `pop'
+  2015-03-31 16:25:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/plugin/buf_memory.rb:94:in `block in before_shutdown'
+  2015-03-31 16:25:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/2.1.0/monitor.rb:211:in `mon_synchronize'
+  2015-03-31 16:25:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/plugin/buf_memory.rb:90:in `before_shutdown'
+  2015-03-31 16:25:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:391:in `before_shutdown'
+  2015-03-31 16:25:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:156:in `block in run'
+  2015-03-31 16:25:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:155:in `synchronize'
+  2015-03-31 16:25:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:155:in `run'
+2015-03-31 16:25:17 +0000 [info]: process finished code=0
+2015-03-31 16:25:17 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:25:17 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:25:17 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:25:17 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:25:17 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:25:17 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:25:17 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:25:17 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:25:17 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:25:17 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:25:17 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:25:17 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:25:17 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:25:17 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:25:17 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy1%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    schema_path /etc/td-agent/haproxy.schema
+  </match>
+</ROOT>
+2015-03-31 16:25:17 +0000 [info]: adding source type="tail"
+2015-03-31 16:25:17 +0000 [info]: adding source type="tail"
+2015-03-31 16:25:17 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:25:17 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 16:25:17 +0000 [info]: following tail of /var/log/nginx/access.log
+2015-03-31 16:25:23 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:25:23 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:25:24 +0000 [error]: tabledata.insertAll API project_id="ybd-rtb-stg" dataset="logs" table="haproxy120150331" code=404 message="Not Found: Table ybd-rtb-stg:logs.haproxy120150331"
+2015-03-31 16:25:24 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2015-03-31 16:25:25 +0000 error_class="RuntimeError" error="failed to insert into bigquery" plugin_id="object:3fc92061e92c"
+  2015-03-31 16:25:24 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:309:in `insert'
+  2015-03-31 16:25:24 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:346:in `write'
+  2015-03-31 16:25:24 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:300:in `write_chunk'
+  2015-03-31 16:25:24 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:280:in `pop'
+  2015-03-31 16:25:24 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:316:in `try_flush'
+  2015-03-31 16:25:24 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:136:in `run'
+2015-03-31 16:25:26 +0000 [warn]: retry succeeded. plugin_id="object:3fc92061e92c"
+2015-03-31 16:25:30 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:25:53 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:29:05 +0000 [error]: dry run failed: field time is registered twice
+2015-03-31 16:29:09 +0000 [error]: dry run failed: field time is registered twice
+2015-03-31 16:29:42 +0000 [error]: dry run failed: field time is registered twice
+2015-03-31 16:31:16 +0000 [info]: shutting down fluentd
+2015-03-31 16:31:16 +0000 [info]: process finished code=0
+2015-03-31 16:31:16 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:31:17 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:31:17 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:31:17 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:31:17 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:31:17 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:31:17 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:31:17 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:31:17 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:31:17 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:31:17 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:31:17 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:31:17 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:31:17 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:31:17 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    schema_path /etc/td-agent/haproxy.schema
+    field_integer time
+  </match>
+</ROOT>
+2015-03-31 16:31:17 +0000 [info]: adding source type="tail"
+2015-03-31 16:31:17 +0000 [info]: adding source type="tail"
+2015-03-31 16:31:17 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:31:17 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 16:31:17 +0000 [info]: following tail of /var/log/nginx/access.log
+2015-03-31 16:31:34 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:31:35 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:31:35 +0000 [error]: tabledata.insertAll API project_id="ybd-rtb-stg" dataset="logs" table="haproxy20150331" code=404 message="Not Found: Table ybd-rtb-stg:logs.haproxy20150331"
+2015-03-31 16:31:35 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2015-03-31 16:31:36 +0000 error_class="RuntimeError" error="failed to insert into bigquery" plugin_id="object:3f919e82070c"
+  2015-03-31 16:31:35 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:309:in `insert'
+  2015-03-31 16:31:35 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:346:in `write'
+  2015-03-31 16:31:35 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:300:in `write_chunk'
+  2015-03-31 16:31:35 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:280:in `pop'
+  2015-03-31 16:31:35 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:316:in `try_flush'
+  2015-03-31 16:31:35 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:136:in `run'
+2015-03-31 16:31:35 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:31:37 +0000 [warn]: retry succeeded. plugin_id="object:3f919e82070c"
+2015-03-31 16:39:07 +0000 [info]: shutting down fluentd
+2015-03-31 16:39:07 +0000 [info]: process finished code=0
+2015-03-31 16:39:07 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:39:07 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:39:07 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:39:07 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:39:07 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:39:07 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:39:07 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:39:07 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:39:07 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:39:07 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:39:07 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:39:07 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:39:07 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:39:07 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:39:07 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy%Y%m%d
+    auto_create_table true
+    time_format %d/%b/%Y:%H:%M:%S %z
+    time_field time
+    schema_path /etc/td-agent/haproxy.schema
+    field_integer time
+  </match>
+</ROOT>
+2015-03-31 16:39:07 +0000 [info]: adding source type="tail"
+2015-03-31 16:39:07 +0000 [info]: adding source type="tail"
+2015-03-31 16:39:07 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:39:08 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 16:39:08 +0000 [info]: following tail of /var/log/nginx/access.log
+2015-03-31 16:39:16 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:39:16 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:39:17 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:39:20 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:40:51 +0000 [info]: shutting down fluentd
+2015-03-31 16:40:51 +0000 [info]: process finished code=0
+2015-03-31 16:40:51 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:40:51 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:40:52 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:40:52 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:40:52 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:40:52 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:40:52 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:40:52 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:40:52 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:40:52 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:40:52 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:40:52 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:40:52 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:40:52 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:40:52 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %d/%B/%Y:%H:%M:%S
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy%Y%m%d
+    auto_create_table true
+    time_format %d/%b/%Y:%H:%M:%S
+    time_field time
+    field_integer time
+    schema_path /etc/td-agent/haproxy.schema
+  </match>
+</ROOT>
+2015-03-31 16:40:52 +0000 [info]: adding source type="tail"
+2015-03-31 16:40:52 +0000 [info]: adding source type="tail"
+2015-03-31 16:40:52 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:40:52 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 16:40:52 +0000 [info]: following tail of /var/log/nginx/access.log
+2015-03-31 16:41:06 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:41:07 +0000 [error]: tabledata.insertAll API project_id="ybd-rtb-stg" dataset="logs" table="haproxy20150331" code=404 message="Not Found: Table ybd-rtb-stg:logs.haproxy20150331"
+2015-03-31 16:41:07 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2015-03-31 16:41:08 +0000 error_class="RuntimeError" error="failed to insert into bigquery" plugin_id="object:3f96a84207d8"
+  2015-03-31 16:41:07 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:309:in `insert'
+  2015-03-31 16:41:07 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:346:in `write'
+  2015-03-31 16:41:07 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:300:in `write_chunk'
+  2015-03-31 16:41:07 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:280:in `pop'
+  2015-03-31 16:41:07 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:316:in `try_flush'
+  2015-03-31 16:41:07 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:136:in `run'
+2015-03-31 16:41:09 +0000 [warn]: retry succeeded. plugin_id="object:3f96a84207d8"
+2015-03-31 16:41:11 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:41:11 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:45:42 +0000 [info]: shutting down fluentd
+2015-03-31 16:45:42 +0000 [info]: process finished code=0
+2015-03-31 16:45:43 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:45:43 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:45:43 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:45:43 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:45:43 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:45:43 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:45:43 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:45:43 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:45:43 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:45:43 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:45:43 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:45:43 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:45:43 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:45:43 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:45:43 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %s
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    field_integer time
+    schema_path /etc/td-agent/haproxy.schema
+  </match>
+</ROOT>
+2015-03-31 16:45:43 +0000 [info]: adding source type="tail"
+2015-03-31 16:45:43 +0000 [info]: adding source type="tail"
+2015-03-31 16:45:43 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:45:43 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 16:45:43 +0000 [info]: following tail of /var/log/nginx/access.log
+2015-03-31 16:45:57 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:45:58 +0000 [error]: tabledata.insertAll API project_id="ybd-rtb-stg" dataset="logs" table="haproxy20150331" code=404 message="Not Found: Table ybd-rtb-stg:logs.haproxy20150331"
+2015-03-31 16:45:58 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2015-03-31 16:45:59 +0000 error_class="RuntimeError" error="failed to insert into bigquery" plugin_id="object:3fab31c208c8"
+  2015-03-31 16:45:58 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:309:in `insert'
+  2015-03-31 16:45:58 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:346:in `write'
+  2015-03-31 16:45:58 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:300:in `write_chunk'
+  2015-03-31 16:45:58 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:280:in `pop'
+  2015-03-31 16:45:58 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:316:in `try_flush'
+  2015-03-31 16:45:58 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:136:in `run'
+2015-03-31 16:46:00 +0000 [warn]: retry succeeded. plugin_id="object:3fab31c208c8"
+2015-03-31 16:46:02 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:46:03 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 16:50:12 +0000 [info]: shutting down fluentd
+2015-03-31 16:50:12 +0000 [info]: process finished code=0
+2015-03-31 16:50:12 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 16:50:12 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 16:50:12 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 16:50:12 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 16:50:12 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 16:50:12 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 16:50:12 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 16:50:12 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 16:50:12 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 16:50:12 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 16:50:12 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 16:50:12 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 16:50:12 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 16:50:12 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 16:50:12 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %s
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match **>
+    type stdout
+  </match>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    field_integer time
+    schema_path /etc/td-agent/haproxy.schema
+  </match>
+</ROOT>
+2015-03-31 16:50:12 +0000 [info]: adding source type="tail"
+2015-03-31 16:50:12 +0000 [info]: adding source type="tail"
+2015-03-31 16:50:12 +0000 [info]: adding match pattern="**" type="stdout"
+2015-03-31 16:50:12 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 16:50:13 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 16:50:13 +0000 [info]: following tail of /var/log/nginx/access.log
+1970-01-01 00:00:31 +0000 haproxy: {"syslog_time":"Mar 31 16:50:19","syslog_host":"localhost","ps":"haproxy","pid":"6317","c_ip":"62.219.165.254","c_port":"49656","f_end":"FE","b_end":"BE","b_server":"BE","tq":"9","tw":"0","tc":"1","tr":"0","tt":"10","status_code":"304","bytes":"188","req_cookie":"-","res_cookie":"-","t_state":"----","actconn":"2","feconn":"2","beconn":"0","srv_conn":"1","retries":"0","srv_queue":"0","backend_queue":"0","req_headers":"","res_headers":"","request":"GET / HTTP/1.1"}
+2015-03-31 16:50:19 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 16:53:34 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"200","size":"396","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2251.0 Safari/537.36"}
+1970-01-01 00:00:31 +0000 haproxy: {"syslog_time":"Mar 31 16:53:34","syslog_host":"localhost","ps":"haproxy","pid":"6317","c_ip":"182.118.55.176","c_port":"16730","f_end":"FE","b_end":"BE","b_server":"BE","tq":"0","tw":"0","tc":"0","tr":"1","tt":"1","status_code":"200","bytes":"629","req_cookie":"-","res_cookie":"-","t_state":"----","actconn":"1","feconn":"1","beconn":"0","srv_conn":"1","retries":"0","srv_queue":"0","backend_queue":"0","req_headers":"","res_headers":"","request":"GET / HTTP/1.1"}
+2015-03-31 17:02:43 +0000 [info]: shutting down fluentd
+2015-03-31 17:02:43 +0000 [info]: process finished code=0
+2015-03-31 17:02:44 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 17:02:44 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 17:02:44 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 17:02:44 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 17:02:44 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 17:02:44 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 17:02:44 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 17:02:44 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 17:02:44 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 17:02:44 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 17:02:44 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 17:02:44 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 17:02:44 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 17:02:44 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 17:02:44 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) \[(?<time>.+)\] (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %s
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match **>
+    type stdout
+  </match>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    field_integer time
+    schema_path /etc/td-agent/haproxy.schema
+  </match>
+</ROOT>
+2015-03-31 17:02:44 +0000 [info]: adding source type="tail"
+2015-03-31 17:02:44 +0000 [info]: adding source type="tail"
+2015-03-31 17:02:44 +0000 [info]: adding match pattern="**" type="stdout"
+2015-03-31 17:02:44 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 17:02:44 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 17:02:44 +0000 [info]: following tail of /var/log/nginx/access.log
+2015-03-31 17:02:52 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:02:52 +0000 [warn]: pattern not match: "2015-03-31T17:02:52+00:00 localhost haproxy[6317]: 62.219.165.254:50033 [31/Mar/2015:17:02:52.789] FE BE/BE 1/0/0/0/1 304 188 - - ---- 1/1/0/1/0 0/0 \"GET / HTTP/1.1\""
+2015-03-31 17:02:52 +0000 fluent.warn: {"message":"pattern not match: \"2015-03-31T17:02:52+00:00 localhost haproxy[6317]: 62.219.165.254:50033 [31/Mar/2015:17:02:52.789] FE BE/BE 1/0/0/0/1 304 188 - - ---- 1/1/0/1/0 0/0 \\\"GET / HTTP/1.1\\\"\""}
+2015-03-31 17:12:33 +0000 haproxy: {"syslog_time":"Mar 31 17:12:33","syslog_host":"localhost","ps":"haproxy","pid":"12114","message":"Proxy FE started."}
+2015-03-31 17:12:33 +0000 haproxy: {"syslog_time":"Mar 31 17:12:33","syslog_host":"localhost","ps":"haproxy","pid":"12114","message":"Proxy BE started."}
+2015-03-31 17:12:33 +0000 haproxy: {"syslog_time":"Mar 31 17:12:33","syslog_host":"localhost","ps":"haproxy","pid":"12114","message":"Proxy admin started."}
+2015-03-31 17:12:44 +0000 [info]: detected rotation of /var/log/haproxy.log; waiting 5 seconds
+2015-03-31 17:12:44 +0000 fluent.info: {"message":"detected rotation of /var/log/haproxy.log; waiting 5 seconds"}
+2015-03-31 17:12:46 +0000 haproxy: {"syslog_time":"Mar 31 17:12:46","syslog_host":"localhost","ps":"haproxy","pid":"12143","message":"Proxy FE started."}
+2015-03-31 17:12:46 +0000 haproxy: {"syslog_time":"Mar 31 17:12:46","syslog_host":"localhost","ps":"haproxy","pid":"12143","message":"Proxy BE started."}
+2015-03-31 17:12:46 +0000 haproxy: {"syslog_time":"Mar 31 17:12:46","syslog_host":"localhost","ps":"haproxy","pid":"12143","message":"Proxy admin started."}
+2015-03-31 17:12:55 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:13:28 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 17:13:28 +0000 fluent.info: {"message":"following tail of /var/log/haproxy.log"}
+2015-03-31 17:13:33 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:15:18 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:15:24 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:21:55 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:24:14 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:26:19 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"200","size":"396","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:28:20 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:29:28 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:30:15 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:31:24 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:34:06 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:34:27 +0000 [info]: detected rotation of /var/log/haproxy.log; waiting 5 seconds
+2015-03-31 17:34:27 +0000 fluent.info: {"message":"detected rotation of /var/log/haproxy.log; waiting 5 seconds"}
+2015-03-31 17:34:31 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 17:34:31 +0000 haproxy: {"syslog_time":"Mar 31 17:34:31","syslog_host":"localhost","ps":"haproxy","pid":"12918","message":"Proxy FE started."}
+2015-03-31 17:34:31 +0000 haproxy: {"syslog_time":"Mar 31 17:34:31","syslog_host":"localhost","ps":"haproxy","pid":"12918","message":"Proxy BE started."}
+2015-03-31 17:34:31 +0000 haproxy: {"syslog_time":"Mar 31 17:34:31","syslog_host":"localhost","ps":"haproxy","pid":"12918","message":"Proxy admin started."}
+2015-03-31 17:34:31 +0000 fluent.info: {"message":"following tail of /var/log/haproxy.log"}
+2015-03-31 17:34:36 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+1970-01-01 00:00:31 +0000 haproxy: {"syslog_time":"Mar 31 17:34:36","syslog_host":"localhost","ps":"haproxy","pid":"12919","c_ip":"62.219.165.254","c_port":"51162","f_end":"FE","b_end":"BE","b_server":"BE","tq":"1","tw":"0","tc":"0","tr":"1","tt":"2","status_code":"304","bytes":"188","req_cookie":"-","res_cookie":"-","t_state":"----","actconn":"1","feconn":"1","beconn":"0","srv_conn":"1","retries":"0","srv_queue":"0","backend_queue":"0","req_headers":"","res_headers":"","request":"GET / HTTP/1.1"}
+2015-03-31 17:34:37 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+1970-01-01 00:00:31 +0000 haproxy: {"syslog_time":"Mar 31 17:34:37","syslog_host":"localhost","ps":"haproxy","pid":"12919","c_ip":"62.219.165.254","c_port":"51162","f_end":"FE","b_end":"BE","b_server":"BE","tq":"319","tw":"0","tc":"0","tr":"0","tt":"319","status_code":"304","bytes":"188","req_cookie":"-","res_cookie":"-","t_state":"----","actconn":"1","feconn":"1","beconn":"0","srv_conn":"1","retries":"0","srv_queue":"0","backend_queue":"0","req_headers":"","res_headers":"","request":"GET / HTTP/1.1"}
+2015-03-31 17:34:37 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+1970-01-01 00:00:31 +0000 haproxy: {"syslog_time":"Mar 31 17:34:37","syslog_host":"localhost","ps":"haproxy","pid":"12919","c_ip":"62.219.165.254","c_port":"51162","f_end":"FE","b_end":"BE","b_server":"BE","tq":"323","tw":"0","tc":"0","tr":"1","tt":"324","status_code":"304","bytes":"188","req_cookie":"-","res_cookie":"-","t_state":"----","actconn":"2","feconn":"2","beconn":"0","srv_conn":"1","retries":"0","srv_queue":"0","backend_queue":"0","req_headers":"","res_headers":"","request":"GET / HTTP/1.1"}
+2015-03-31 17:37:03 +0000 haproxy: {"syslog_time":"Mar 31 17:37:03","syslog_host":"localhost","ps":"haproxy","pid":"12989","message":"Proxy FE started."}
+2015-03-31 17:37:03 +0000 haproxy: {"syslog_time":"Mar 31 17:37:03","syslog_host":"localhost","ps":"haproxy","pid":"12989","message":"Proxy BE started."}
+2015-03-31 17:37:03 +0000 haproxy: {"syslog_time":"Mar 31 17:37:03","syslog_host":"localhost","ps":"haproxy","pid":"12989","message":"Proxy admin started."}
+2015-03-31 17:37:08 +0000 haproxy: {"syslog_time":"Mar 31 17:37:08","syslog_host":"localhost","ps":"haproxy","pid":"12990","message":"[12990] [1427823428.694] 1/1/0/0/1/0/0 1/0/0/1/2 ---- 62.219.165.254:51233 10.240.95.30:80 127.0.0.1:8080 FE - - \"GET / HTTP/1.1\" 304 BE:BE \"-\" \"\" \"-\" \"\" req_size=458 resp_size=188"}
+2015-03-31 17:37:08 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:37:08 +0000 haproxy: {"syslog_time":"Mar 31 17:37:08","syslog_host":"localhost","ps":"haproxy","pid":"12990","message":"[12990] [1427823428.697] 2/2/0/0/1/0/0 279/0/0/0/279 ---- 62.219.165.254:51233 10.240.95.30:80 127.0.0.1:8080 FE - - \"GET / HTTP/1.1\" 304 BE:BE \"-\" \"\" \"-\" \"\" req_size=458 resp_size=188"}
+2015-03-31 17:37:08 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:37:09 +0000 haproxy: {"syslog_time":"Mar 31 17:37:09","syslog_host":"localhost","ps":"haproxy","pid":"12990","message":"[12990] [1427823428.976] 2/2/0/0/1/0/0 305/0/0/0/305 ---- 62.219.165.254:51233 10.240.95.30:80 127.0.0.1:8080 FE - - \"GET / HTTP/1.1\" 304 BE:BE \"-\" \"\" \"-\" \"\" req_size=458 resp_size=188"}
+2015-03-31 17:37:09 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:40:08 +0000 haproxy: {"syslog_time":"Mar 31 17:40:08","syslog_host":"localhost","ps":"haproxy","pid":"13061","message":"Proxy FE started."}
+2015-03-31 17:40:08 +0000 haproxy: {"syslog_time":"Mar 31 17:40:08","syslog_host":"localhost","ps":"haproxy","pid":"13061","message":"Proxy BE started."}
+2015-03-31 17:40:08 +0000 haproxy: {"syslog_time":"Mar 31 17:40:08","syslog_host":"localhost","ps":"haproxy","pid":"13061","message":"Proxy admin started."}
+2015-03-31 17:40:14 +0000 haproxy: {"syslog_time":"Mar 31 17:40:14","syslog_host":"localhost","ps":"haproxy","pid":"13062","message":"62.219.165.254:51380 [31/Mar/2015:17:40:14.138] 1427823614 FE BE/BE 1/0/0/1/2 304 188 - - ---- 2/2/0/1/0 0/0 \"GET / HTTP/1.1\""}
+2015-03-31 17:40:14 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:45:35 +0000 haproxy: {"syslog_time":"Mar 31 17:45:35","syslog_host":"localhost","ps":"haproxy","pid":"13266","message":"Proxy FE started."}
+2015-03-31 17:45:35 +0000 haproxy: {"syslog_time":"Mar 31 17:45:35","syslog_host":"localhost","ps":"haproxy","pid":"13266","message":"Proxy BE started."}
+2015-03-31 17:45:35 +0000 haproxy: {"syslog_time":"Mar 31 17:45:35","syslog_host":"localhost","ps":"haproxy","pid":"13266","message":"Proxy admin started."}
+2015-03-31 17:45:41 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:45:41 +0000 haproxy: {"syslog_time":"Mar 31 17:45:41","syslog_host":"localhost","ps":"haproxy","pid":"13267","message":"62.219.165.254:51560 1427823941 FE BE/BE 1/0/0/1/2 304 188 - - ---- 1/1/0/1/0 0/0 \"GET / HTTP/1.1\""}
+2015-03-31 17:47:11 +0000 [info]: shutting down fluentd
+2015-03-31 17:47:11 +0000 [info]: process finished code=0
+2015-03-31 17:47:11 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 17:47:12 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 17:47:12 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 17:47:12 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 17:47:12 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 17:47:12 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 17:47:12 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 17:47:12 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 17:47:12 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 17:47:12 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 17:47:12 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 17:47:12 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 17:47:12 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 17:47:12 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 17:47:12 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) (?<time>.+) (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %s
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match **>
+    type stdout
+  </match>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    field_integer time
+    schema_path /etc/td-agent/haproxy.schema
+  </match>
+</ROOT>
+2015-03-31 17:47:12 +0000 [info]: adding source type="tail"
+2015-03-31 17:47:12 +0000 [info]: adding source type="tail"
+2015-03-31 17:47:12 +0000 [info]: adding match pattern="**" type="stdout"
+2015-03-31 17:47:12 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 17:47:12 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 17:47:12 +0000 [info]: following tail of /var/log/nginx/access.log
+2015-03-31 17:47:30 +0000 haproxy: {"syslog_time":"Mar 31 17:47:30","syslog_host":"localhost","ps":"haproxy","pid":"13267","c_ip":"62.219.165.254","c_port":"51611","f_end":"FE","b_end":"BE","b_server":"BE","tq":"1","tw":"0","tc":"0","tr":"0","tt":"1","status_code":"304","bytes":"188","req_cookie":"-","res_cookie":"-","t_state":"----","actconn":"1","feconn":"1","beconn":"0","srv_conn":"1","retries":"0","srv_queue":"0","backend_queue":"0","req_headers":"","res_headers":"","request":"GET / HTTP/1.1"}
+2015-03-31 17:47:30 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:54:15 +0000 [info]: shutting down fluentd
+2015-03-31 17:54:15 +0000 fluent.info: {"message":"shutting down fluentd"}
+2015-03-31 17:54:15 +0000 [info]: process finished code=0
+2015-03-31 17:54:15 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 17:54:15 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 17:54:16 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 17:54:16 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 17:54:16 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 17:54:16 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 17:54:16 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 17:54:16 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 17:54:16 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 17:54:16 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 17:54:16 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 17:54:16 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 17:54:16 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 17:54:16 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 17:54:16 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) (?<time>\d++) (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %s
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match **>
+    type stdout
+  </match>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    field_integer time
+    schema_path /etc/td-agent/haproxy.schema
+  </match>
+</ROOT>
+2015-03-31 17:54:16 +0000 [info]: adding source type="tail"
+2015-03-31 17:54:16 +0000 [info]: adding source type="tail"
+2015-03-31 17:54:16 +0000 [info]: adding match pattern="**" type="stdout"
+2015-03-31 17:54:16 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 17:54:16 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 17:54:16 +0000 [info]: following tail of /var/log/nginx/access.log
+2015-03-31 17:54:22 +0000 haproxy: {"syslog_time":"Mar 31 17:54:22","syslog_host":"localhost","ps":"haproxy","pid":"13267","c_ip":"62.219.165.254","c_port":"51811","f_end":"FE","b_end":"BE","b_server":"BE","tq":"0","tw":"0","tc":"1","tr":"0","tt":"1","status_code":"304","bytes":"188","req_cookie":"-","res_cookie":"-","t_state":"----","actconn":"1","feconn":"1","beconn":"0","srv_conn":"1","retries":"0","srv_queue":"0","backend_queue":"0","req_headers":"","res_headers":"","request":"GET / HTTP/1.1"}
+2015-03-31 17:54:22 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:56:04 +0000 [info]: shutting down fluentd
+2015-03-31 17:56:05 +0000 [info]: process finished code=0
+2015-03-31 17:56:05 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 17:56:05 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 17:56:05 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 17:56:05 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 17:56:05 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 17:56:05 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 17:56:05 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 17:56:05 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 17:56:05 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 17:56:05 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 17:56:05 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 17:56:05 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 17:56:05 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 17:56:05 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 17:56:05 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) (?<unixtime>\d+) (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %s
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match **>
+    type stdout
+  </match>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    field_integer time
+    schema_path /etc/td-agent/haproxy.schema
+  </match>
+</ROOT>
+2015-03-31 17:56:05 +0000 [info]: adding source type="tail"
+2015-03-31 17:56:05 +0000 [info]: adding source type="tail"
+2015-03-31 17:56:05 +0000 [info]: adding match pattern="**" type="stdout"
+2015-03-31 17:56:05 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 17:56:05 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 17:56:05 +0000 [info]: following tail of /var/log/nginx/access.log
+2015-03-31 17:56:13 +0000 nginx: {"remote":"127.0.0.1","host":"-","user":"-","method":"GET","path":"/","code":"304","size":"0","referer":"-","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36"}
+2015-03-31 17:56:13 +0000 haproxy: {"syslog_time":"Mar 31 17:56:13","syslog_host":"localhost","ps":"haproxy","pid":"13267","c_ip":"62.219.165.254","c_port":"51860","unixtime":"1427824573","f_end":"FE","b_end":"BE","b_server":"BE","tq":"1","tw":"0","tc":"0","tr":"0","tt":"1","status_code":"304","bytes":"188","req_cookie":"-","res_cookie":"-","t_state":"----","actconn":"2","feconn":"2","beconn":"0","srv_conn":"1","retries":"0","srv_queue":"0","backend_queue":"0","req_headers":"","res_headers":"","request":"GET / HTTP/1.1"}
+2015-03-31 17:57:58 +0000 [info]: shutting down fluentd
+2015-03-31 17:57:58 +0000 [info]: process finished code=0
+2015-03-31 17:57:59 +0000 [info]: reading config file path="/etc/td-agent/td-agent.conf"
+2015-03-31 17:57:59 +0000 [info]: starting fluentd-0.10.61
+2015-03-31 17:57:59 +0000 [info]: gem 'fluent-mixin-config-placeholders' version '0.3.0'
+2015-03-31 17:57:59 +0000 [info]: gem 'fluent-mixin-plaintextformatter' version '0.2.6'
+2015-03-31 17:57:59 +0000 [info]: gem 'fluent-plugin-bigquery' version '0.2.7'
+2015-03-31 17:57:59 +0000 [info]: gem 'fluent-plugin-buffer-lightening' version '0.0.2'
+2015-03-31 17:57:59 +0000 [info]: gem 'fluent-plugin-mongo' version '0.7.6'
+2015-03-31 17:57:59 +0000 [info]: gem 'fluent-plugin-rewrite-tag-filter' version '1.4.1'
+2015-03-31 17:57:59 +0000 [info]: gem 'fluent-plugin-s3' version '0.5.6'
+2015-03-31 17:57:59 +0000 [info]: gem 'fluent-plugin-scribe' version '0.10.14'
+2015-03-31 17:57:59 +0000 [info]: gem 'fluent-plugin-td' version '0.10.26'
+2015-03-31 17:57:59 +0000 [info]: gem 'fluent-plugin-td-monitoring' version '0.2.0'
+2015-03-31 17:57:59 +0000 [info]: gem 'fluent-plugin-webhdfs' version '0.4.1'
+2015-03-31 17:57:59 +0000 [info]: gem 'fluentd' version '0.10.61'
+2015-03-31 17:57:59 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    type tail
+    path /var/log/haproxy.log
+    pos_file /var/log/td-agent/haproxy.log.pos
+    tag haproxy
+    format /^(?<syslog_time>[^ ]* +[^ ]* +[^ ]*) (?<syslog_host>[\w-\.]+) (?<ps>\w+)\[(?<pid>\d+)\]: ((?<c_ip>[\w\.]+):(?<c_port>\d+) (?<unixtime>\d+) (?<f_end>[\w\~-]+) (?<b_end>[\w-]+)\/(?<b_server>[\w\.-]+) (?<tq>\d+)\/(?<tw>\d+)\/(?<tc>\d+)\/(?<tr>\d+)\/(?<tt>\d+) (?<status_code>\d+) (?<bytes>\d+) (?<req_cookie>\S?) (?<res_cookie>\S?) (?<t_state>[\w-]+) (?<actconn>\d+)\/(?<feconn>\d+)\/(?<beconn>\d+)\/(?<srv_conn>\d+)\/(?<retries>\d+) (?<srv_queue>\d+)\/(?<backend_queue>\d+) \{?(?<req_headers>[^}]*)\}? ?\{?(?<res_headers>[^}]*)\}? ?"(?<request>[^"]*)"|(?<message>.+))/
+    time_format %s
+  </source>
+  <source>
+    type tail
+    path /var/log/nginx/access.log
+    pos_file /var/log/td-agent/nginx-access.log.pos
+    tag nginx
+    format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
+    time_format %d/%b/%Y:%H:%M:%S %z
+  </source>
+  <match haproxy>
+    type bigquery
+    method insert
+    auth_method private_key
+    email 165851901010-rdemrq1je1q91m3n2lg3l3jfsteb4bfh@developer.gserviceaccount.com
+    private_key_path /etc/td-agent/key.p12
+    project ybd-rtb-stg
+    dataset logs
+    table haproxy%Y%m%d
+    auto_create_table true
+    time_format %s
+    time_field time
+    field_integer time
+    schema_path /etc/td-agent/haproxy.schema
+  </match>
+</ROOT>
+2015-03-31 17:57:59 +0000 [info]: adding source type="tail"
+2015-03-31 17:57:59 +0000 [info]: adding source type="tail"
+2015-03-31 17:57:59 +0000 [info]: adding match pattern="haproxy" type="bigquery"
+2015-03-31 17:57:59 +0000 [info]: following tail of /var/log/haproxy.log
+2015-03-31 17:57:59 +0000 [info]: following tail of /var/log/nginx/access.log
+2015-03-31 17:58:13 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 17:58:14 +0000 [error]: tabledata.insertAll API project_id="ybd-rtb-stg" dataset="logs" table="haproxy20150331" code=404 message="Not Found: Table ybd-rtb-stg:logs.haproxy20150331"
+2015-03-31 17:58:14 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2015-03-31 17:58:15 +0000 error_class="RuntimeError" error="failed to insert into bigquery" plugin_id="object:3ffa8721c9f8"
+  2015-03-31 17:58:14 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:309:in `insert'
+  2015-03-31 17:58:14 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:346:in `write'
+  2015-03-31 17:58:14 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:300:in `write_chunk'
+  2015-03-31 17:58:14 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:280:in `pop'
+  2015-03-31 17:58:14 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:316:in `try_flush'
+  2015-03-31 17:58:14 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:136:in `run'
+2015-03-31 17:58:16 +0000 [warn]: retry succeeded. plugin_id="object:3ffa8721c9f8"
+2015-03-31 17:58:19 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 20:18:03 +0000 [warn]: no patterns matched tag="nginx"
+2015-03-31 21:39:31 +0000 [warn]: no patterns matched tag="nginx"
+2015-04-01 05:02:17 +0000 [error]: tabledata.insertAll API project_id="ybd-rtb-stg" dataset="logs" table="haproxy20150401" code=404 message="Not Found: Table ybd-rtb-stg:logs.haproxy20150401"
+2015-04-01 05:02:17 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2015-04-01 05:02:18 +0000 error_class="RuntimeError" error="failed to insert into bigquery" plugin_id="object:3ffa8721c9f8"
+  2015-04-01 05:02:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:309:in `insert'
+  2015-04-01 05:02:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-bigquery-0.2.7/lib/fluent/plugin/out_bigquery.rb:346:in `write'
+  2015-04-01 05:02:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:300:in `write_chunk'
+  2015-04-01 05:02:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/buffer.rb:280:in `pop'
+  2015-04-01 05:02:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:316:in `try_flush'
+  2015-04-01 05:02:17 +0000 [warn]: /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.10.61/lib/fluent/output.rb:136:in `run'
+2015-04-01 05:02:19 +0000 [warn]: retry succeeded. plugin_id="object:3ffa8721c9f8"

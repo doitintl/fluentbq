@@ -1,0 +1,30 @@
+Mar 31 17:34:31 localhost haproxy[12918]: Proxy FE started.
+Mar 31 17:34:31 localhost haproxy[12918]: Proxy BE started.
+Mar 31 17:34:31 localhost haproxy[12918]: Proxy admin started.
+Mar 31 17:34:36 localhost haproxy[12919]: 62.219.165.254:51162 [31/Mar/2015:17:34:36.959] FE BE/BE 1/0/0/1/2 304 188 - - ---- 1/1/0/1/0 0/0 "GET / HTTP/1.1"
+Mar 31 17:34:37 localhost haproxy[12919]: 62.219.165.254:51162 [31/Mar/2015:17:34:36.961] FE BE/BE 319/0/0/0/319 304 188 - - ---- 1/1/0/1/0 0/0 "GET / HTTP/1.1"
+Mar 31 17:34:37 localhost haproxy[12919]: 62.219.165.254:51162 [31/Mar/2015:17:34:37.280] FE BE/BE 323/0/0/1/324 304 188 - - ---- 2/2/0/1/0 0/0 "GET / HTTP/1.1"
+Mar 31 17:37:03 localhost haproxy[12989]: Proxy FE started.
+Mar 31 17:37:03 localhost haproxy[12989]: Proxy BE started.
+Mar 31 17:37:03 localhost haproxy[12989]: Proxy admin started.
+Mar 31 17:37:08 localhost haproxy[12990]: [12990] [1427823428.694] 1/1/0/0/1/0/0 1/0/0/1/2 ---- 62.219.165.254:51233 10.240.95.30:80 127.0.0.1:8080 FE - - "GET / HTTP/1.1" 304 BE:BE "-" "" "-" "" req_size=458 resp_size=188
+Mar 31 17:37:08 localhost haproxy[12990]: [12990] [1427823428.697] 2/2/0/0/1/0/0 279/0/0/0/279 ---- 62.219.165.254:51233 10.240.95.30:80 127.0.0.1:8080 FE - - "GET / HTTP/1.1" 304 BE:BE "-" "" "-" "" req_size=458 resp_size=188
+Mar 31 17:37:09 localhost haproxy[12990]: [12990] [1427823428.976] 2/2/0/0/1/0/0 305/0/0/0/305 ---- 62.219.165.254:51233 10.240.95.30:80 127.0.0.1:8080 FE - - "GET / HTTP/1.1" 304 BE:BE "-" "" "-" "" req_size=458 resp_size=188
+Mar 31 17:40:08 localhost haproxy[13061]: Proxy FE started.
+Mar 31 17:40:08 localhost haproxy[13061]: Proxy BE started.
+Mar 31 17:40:08 localhost haproxy[13061]: Proxy admin started.
+Mar 31 17:40:14 localhost haproxy[13062]: 62.219.165.254:51380 [31/Mar/2015:17:40:14.138] 1427823614 FE BE/BE 1/0/0/1/2 304 188 - - ---- 2/2/0/1/0 0/0 "GET / HTTP/1.1"
+Mar 31 17:45:35 localhost haproxy[13266]: Proxy FE started.
+Mar 31 17:45:35 localhost haproxy[13266]: Proxy BE started.
+Mar 31 17:45:35 localhost haproxy[13266]: Proxy admin started.
+Mar 31 17:45:41 localhost haproxy[13267]: 62.219.165.254:51560 1427823941 FE BE/BE 1/0/0/1/2 304 188 - - ---- 1/1/0/1/0 0/0 "GET / HTTP/1.1"
+Mar 31 17:47:30 localhost haproxy[13267]: 62.219.165.254:51611 1427824050 FE BE/BE 1/0/0/0/1 304 188 - - ---- 1/1/0/1/0 0/0 "GET / HTTP/1.1"
+Mar 31 17:54:22 localhost haproxy[13267]: 62.219.165.254:51811 1427824462 FE BE/BE 0/0/1/0/1 304 188 - - ---- 1/1/0/1/0 0/0 "GET / HTTP/1.1"
+Mar 31 17:56:13 localhost haproxy[13267]: 62.219.165.254:51860 1427824573 FE BE/BE 1/0/0/0/1 304 188 - - ---- 2/2/0/1/0 0/0 "GET / HTTP/1.1"
+Mar 31 17:58:13 localhost haproxy[13267]: 62.219.165.254:51918 1427824693 FE BE/BE 1/0/0/1/2 304 188 - - ---- 1/1/0/1/0 0/0 "GET / HTTP/1.1"
+Mar 31 17:58:19 localhost haproxy[13267]: 62.219.165.254:51918 1427824693 FE BE/BE 5388/0/0/0/5388 304 188 - - ---- 2/2/0/1/0 0/0 "GET / HTTP/1.1"
+Mar 31 20:18:36 localhost haproxy[13267]: 60.21.137.114:1571 1427833116 FE BE/BE 0/0/0/1/1 200 858 - - ---- 1/1/0/1/0 0/0 "GET / HTTP/1.1"
+Mar 31 20:18:36 localhost haproxy[13267]: 60.21.137.114:1571 1427833116 FE BE/BE 299/0/0/1/300 200 858 - - ---- 1/1/0/1/0 0/0 "GET / HTTP/1.1"
+Mar 31 21:39:31 localhost haproxy[13267]: 182.118.54.85:27423 1427837970 FE BE/BE 840/0/0/1/841 200 629 - - ---- 1/1/0/1/0 0/0 "GET / HTTP/1.1"
+Mar 31 23:19:48 localhost haproxy[13267]: 162.144.87.81:52978 1427843988 FE BE/BE 0/0/0/0/0 200 241 - - ---- 0/0/0/0/0 0/0 "HEAD / HTTP/1.0"
+Apr  1 05:02:16 localhost haproxy[13267]: 52.16.194.88:48221 1427864536 FE BE/BE 0/0/0/1/1 200 853 - - ---- 0/0/0/0/0 0/0 "GET / HTTP/1.1"

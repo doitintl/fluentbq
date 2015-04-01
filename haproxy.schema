@@ -1,0 +1,152 @@
+[
+   {
+    "name": "syslog_time",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "syslog_host",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "ps",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "pid",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "c_ip",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "c_port",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "unixtime",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "f_end",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "b_end",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "b_server",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "tq",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "tw",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "tc",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "tr",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "tt",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "status_code",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "bytes",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "req_cookie",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "res_cookie",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "t_state",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "actconn",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "feconn",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "beconn",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "srv_conn",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "retries",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "srv_queue",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "backend_queue",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "req_headers",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "res_headers",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "request",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   }
+  ]
