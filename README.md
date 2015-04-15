@@ -3,7 +3,7 @@ Practical example of configuration files to stream logs with Fluentd and BigQuer
 
 # Installation Instructions
 1. Adjust O/S settings as per http://docs.fluentd.org/articles/before-install
-2. Install from repo http://docs.fluentd.org/articles/install-by-deb#step-0-before-installation
+2. Install fluentd from repo http://docs.fluentd.org/articles/install-by-deb#step-0-before-installation
 3. Install BigQuery plugin `/usr/sbin/td-agent-gem install fluent-plugin-bigquery --no-ri --no-rdoc -V`
 4. Create Service Account and download key.p12 file and replace in /etc/td-agent/
 
